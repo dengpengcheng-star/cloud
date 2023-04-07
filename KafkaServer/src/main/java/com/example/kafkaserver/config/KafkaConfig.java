@@ -1,4 +1,4 @@
-package com.example.kafkaserver;
+package com.example.kafkaserver.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -20,6 +20,7 @@ import java.util.Map;
 public class KafkaConfig {
     @Autowired
     private Environment env;
+    public static final String topic = "flink_test";
 
     @Bean
     public ProducerFactory<String, String> producerFactory() {

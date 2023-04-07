@@ -1,8 +1,9 @@
 package com.example.kafkaserver;
 
-import jakarta.annotation.PostConstruct;
+import com.example.kafkaserver.config.KafkaConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,13 +12,9 @@ public class KafkaProducer {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    @PostConstruct
-    public void postConstructor() {
-        send("sssss");
-    }
-
-    public void send(String message) {
-        kafkaTemplate.send("flinktest", message);
+    @Scheduled(cron = "*/10 * * * * ?")
+    public void send() {
+        kafkaTemplate.send(KafkaConfig.topic, "message");
     }
 
 }
